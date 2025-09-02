@@ -10,7 +10,6 @@ function NavBar() {
           <span className="fw-bold">BLOOM</span>
         </a>
 
-        {/* Toggler para móviles */}
         <button
           className="navbar-toggler"
           type="button"
