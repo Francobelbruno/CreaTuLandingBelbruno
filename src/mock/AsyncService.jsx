@@ -26,6 +26,33 @@ const productos = [
         img: "https://i.postimg.cc/ZYMB83Rm/20250902-2044-Buzo-Floral-Personalizado-simple-compose-01k46d0qdxfm8bxp84c54zv04k.png",
         category: "nuevas"
     },
+    {
+        id: '4',
+        titulo: "Campera Personalizada",
+        descripcion: "Crea tu propia campera con nuestro diseñador.",
+        stock: 7,
+        price: 75000,
+        img: "https://i.postimg.cc/k4XkC9CJ/unnamed.png",
+        category: "nuevas"
+    },
+    {
+        id: '5',
+        titulo: "Zapatillas Personalizadas",
+        descripcion: "Diseña unas zapatillas a tu medida.",
+        stock: 6,
+        price: 60000,
+        img: "https://i.postimg.cc/9fckPVrd/unnamed-1.png",
+        category: "nuevas"
+    },
+    {
+        id: '6',
+        titulo: "Vaso Personalizado",
+        descripcion: "Haz un vaso único con nuestro configurador.",
+        stock: 15,
+        price: 15000,
+        img: "https://i.postimg.cc/0y9gn74K/unnamed-2.png",
+        category: "ofertas"
+    }
 ];
 
 export const getProductos = () => { 
@@ -33,5 +60,21 @@ export const getProductos = () => {
         setTimeout(() => {
             resolve(productos);
         }, 2000);
+    });
+}
+
+export const getProductosByCategory = (categoryId) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(productos.filter(p => p.category === categoryId));
+        }, 1200);
+    });
+}
+
+export const getProductoById = (id) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(productos.find(p => String(p.id) === String(id)) || null);
+        }, 1200);
     });
 }

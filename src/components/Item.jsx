@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Item({ item, onAdd }) {
   const image = item?.image || item?.img || '';
@@ -12,10 +13,12 @@ function Item({ item, onAdd }) {
   return (
     <div className="card mb-4 shadow-sm h-100">
       {image && (
-        <img src={image} alt={title} className="card-img-top" style={{ objectFit: 'cover', height: 220 }} />
+        <Link to={`/item/${item?.id}`}>
+          <img src={image} alt={title} className="card-img-top" style={{ objectFit: 'cover', height: 220 }} />
+        </Link>
       )}
       <div className="card-body d-flex flex-column">
-        <h5 className="card-title">{title}</h5>
+        <h5 className="card-title"><Link to={`/item/${item?.id}`} className="text-decoration-none">{title}</Link></h5>
         <p className="card-text text-muted">{description}</p>
 
         <div className="mt-auto d-flex justify-content-between align-items-center">
