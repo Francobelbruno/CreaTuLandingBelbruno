@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useCart } from '../context/CartContext.jsx'
 
-function Item({ item, onAdd }) {
-  const image = item?.image || item?.img || '';
-  const title = item?.name || item?.titulo || 'Sin título';
-  const description = item?.description || item?.descripcion || '';
-  const priceValue = item?.price ?? item?.price ?? null;
+function Item({ item }) {
+  const { addItem } = useCart();
+  const image = item?.img || '';
+  const title = item?.titulo || 'Sin título';
+  const description = item?.descripcion || '';
+  const priceValue = typeof item?.price === 'string' ? parseFloat(item?.price) : item?.price;
   const price = priceValue
     ? new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(priceValue)
     : '';
@@ -26,7 +28,7 @@ function Item({ item, onAdd }) {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => onAdd && onAdd(item)}
+            onClick={() => addItem({ id: item.id, title, price: priceValue, image }, 1)}
             aria-label={`Agregar ${title} al carrito`}
           >
             Agregar

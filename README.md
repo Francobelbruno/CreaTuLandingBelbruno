@@ -1,12 +1,47 @@
-# React + Vite
+# BLOOM - E-commerce con React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web de e-commerce desarrollada con React y Vite. Implementa catálogo, detalle de productos, carrito con Context, checkout y persistencia de datos en Firebase Firestore.
 
-Currently, two official plugins are available:
+## Requisitos
+- Node.js 18+
+- Cuenta de Firebase y proyecto con Firestore habilitado
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Configuración
+1. Copiar variables de entorno
+   - Duplicar `.env.example` como `.env.local` y completar con los valores de tu proyecto Firebase.
 
-## Expanding the ESLint configuration
+2. Instalar dependencias
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+```
+
+3. Ejecutar en desarrollo
+```bash
+npm run dev
+```
+
+4. Compilar
+```bash
+npm run build
+```
+
+## Estructura principal
+- `src/components`
+  - `ItemListContainer`, `ItemList`, `Item`
+  - `ItemDetailContainer`, `ItemDetail`, `ItemCount`
+  - `Cart`, `CheckoutForm`, `CartWidget`, `NavBar`, `NotFound`
+- `src/context/CartContext.jsx` (estado global del carrito)
+- `src/services/` (Firebase config, productos y órdenes)
+
+## Funcionalidades
+- Listado y detalle de productos con React Router
+- Filtro por categorías en rutas `/category/:categoryId`
+- Carrito de compras con Context (agregar, eliminar, vaciar, totales)
+- `CartWidget` muestra la cantidad total de unidades
+- Checkout con creación de orden en Firestore y visualización de ID de compra
+- Renderizado condicional (loaders, carrito vacío, etc.)
+
+## Notas
+- La app usa `HashRouter` para facilitar el deploy en GitHub Pages.
+- Asegurate de crear la colección `products` en Firestore y cargar tus productos con campos: `name`, `price`, `image` (o `img`), `description`, `category`, `stock`.
