@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCart } from '../context/CartContext.jsx';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function Cart() {
   const { items, totalPrice, removeItem, clearCart } = useCart();
@@ -13,6 +14,46 @@ function Cart() {
       </div>
     );
   }
+
+  const handleRemove = async (id, title) => {
+    const res = await Swal.fire({
+      icon: 'warning',
+      title: '¿Eliminar producto?',
+      text: title,
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    });
+    if (res.isConfirmed) {
+      removeItem(id);
+      await Swal.fire({
+        icon: 'success',
+        title: 'Eliminado',
+        timer: 1200,
+        showConfirmButton: false
+      });
+    }
+  };
+
+  const handleClear = async () => {
+    const res = await Swal.fire({
+      icon: 'warning',
+      title: '¿Vaciar carrito?',
+      text: 'Se eliminarán todos los productos',
+      showCancelButton: true,
+      confirmButtonText: 'Vaciar',
+      cancelButtonText: 'Cancelar'
+    });
+    if (res.isConfirmed) {
+      clearCart();
+      await Swal.fire({
+        icon: 'success',
+        title: 'Carrito vacío',
+        timer: 1200,
+        showConfirmButton: false
+      });
+    }
+  };
 
   return (
     <div className="container py-4">
@@ -31,13 +72,13 @@ function Cart() {
               <span className="text-muted">
                 {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(it.price * it.quantity)}
               </span>
-              <button className="btn btn-sm btn-outline-danger" onClick={() => removeItem(it.id)}>Eliminar</button>
+              <button className="btn btn-sm btn-outline-danger" onClick={() => handleRemove(it.id, it.title)}>Eliminar</button>
             </div>
           </li>
         ))}
       </ul>
       <div className="d-flex justify-content-between align-items-center">
-        <button className="btn btn-outline-secondary" onClick={clearCart}>Vaciar carrito</button>
+        <button className="btn btn-outline-secondary" onClick={handleClear}>Vaciar carrito</button>
         <div className="fs-5">
           Total: {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(totalPrice)}
         </div>

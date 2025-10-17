@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext.jsx'
+import Swal from 'sweetalert2'
 
 function Item({ item }) {
   const { addItem } = useCart();
@@ -28,7 +29,17 @@ function Item({ item }) {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => addItem({ id: item.id, title, price: priceValue, image }, 1)}
+            onClick={() => {
+              addItem({ id: item.id, title, price: priceValue, image }, 1);
+              Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: `${title} agregado al carrito`,
+                showConfirmButton: false,
+                timer: 1400
+              });
+            }}
             aria-label={`Agregar ${title} al carrito`}
           >
             Agregar

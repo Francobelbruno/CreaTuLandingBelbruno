@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCart } from '../context/CartContext.jsx';
 import { Link } from 'react-router-dom';
 import ItemCount from './ItemCount';
+import Swal from 'sweetalert2';
 
 function ItemDetail({ item }) {
   const { addItem } = useCart();
@@ -18,6 +19,14 @@ function ItemDetail({ item }) {
       stock: stock 
     }, quantity);
     setAddedQty(quantity);
+    Swal.fire({
+      toast: true,
+      position: 'top-end',
+      icon: 'success',
+      title: `${quantity} agregado(s) al carrito`,
+      showConfirmButton: false,
+      timer: 1400
+    });
   };
 
   return (

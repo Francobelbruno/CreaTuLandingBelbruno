@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCart } from '../context/CartContext.jsx';
 import { createOrder } from '../services/orders';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function CheckoutForm() {
   const { items, totalPrice, clearCart } = useCart();
@@ -26,8 +27,19 @@ function CheckoutForm() {
       const id = await createOrder(order);
       setOrderId(id);
       clearCart();
+      await Swal.fire({
+        icon: 'success',
+        title: 'Compra realizada',
+        html: `Tu número de orden es: <strong>${id}</strong>`,
+        confirmButtonText: 'Perfecto'
+      });
     } catch (err) {
       console.error('Error creating order', err);
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Ocurrió un problema al procesar la orden. Intenta nuevamente.'
+      });
     } finally {
       setLoading(false);
     }
