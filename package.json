@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+  "predeploy": "npm run build && copy docs\\index.html docs\\404.html && type NUL > docs\\.nojekyll",
+    "deploy": "gh-pages -d docs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
