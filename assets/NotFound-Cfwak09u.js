@@ -1,1 +1,0 @@
-import{j as a,L as n}from"./index-jTIg1DJ3.js";function s(){return a.jsxs("div",{className:"container py-5 text-center",children:[a.jsx("h1",{className:"display-5 fw-bold",children:"404"}),a.jsx("p",{className:"lead",children:"Página no encontrada"}),a.jsx(n,{className:"btn btn-primary",to:"/",children:"Volver al inicio"})]})}export{s as default};
